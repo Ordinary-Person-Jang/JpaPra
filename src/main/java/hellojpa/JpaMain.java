@@ -32,19 +32,39 @@ public class JpaMain {
 //            for(Member member : result) {
 //                System.out.println("member.name = " + member.getName());
 //            }
-            Member member = new Member();
-            member.setUsername("MemberE");
-            em.persist(member);
-
-            System.out.println("member.id = " + member.getId());
-
             Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
 
-            
+            Member member = new Member();
+            member.setUsername("MemberE");
+            member.changeTeam(team);
+            em.persist(member);
 
-//
+            System.out.println("member.id = " + member.getId());
+
+            Parent parent = new Parent();
+            parent.setName("Parent1");
+
+            Child child1 = new Child();
+            child1.setName("Child1");
+
+            Child child2 = new Child();
+            child2.setName("Child2");
+
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
+
+            em.flush();
+            em.clear();
+
+            Parent findParent = em.find(Parent.class, parent.getId());
+//            findParent.getChildList().remove(0);
+            em.remove(findParent);
+
+
 //            Member member = new Member();
 //            member.setUsername("member1");
 //            member.changeTeam(team);

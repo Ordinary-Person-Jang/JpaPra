@@ -10,12 +10,16 @@ import java.util.Date;
 public class Member extends BasicEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "MEMBER_ID")
     private Long id;
 
     @Column(name = "USERNAME")
     private String username;
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
